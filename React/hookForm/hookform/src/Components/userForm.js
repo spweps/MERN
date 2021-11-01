@@ -10,43 +10,59 @@ const UserForm = (props) => {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
     const [firstNameError, setfirstNameError] = useState("");
     const [lastNameError, setlastNameError] = useState("");
-    const [emailError, setEmailError] = useState("")
-    const [passwordError, setPasswordError] = useState("")
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [confirmpasswordError, setconfirmpasswordError] = useState("")
     
-    const verifyFirst_name = (e) => {
-        setfirst_name(e.target.value);
-        if(e.target.value.length < 1){
+    const verifyFirst_name = (newname) => {
+        setfirst_name(newname);
+        console.log(newname)
+        if(newname.length < 1){
             setfirstNameError("First name is required.");
-        } else if(e.target.value.length < 3){
+        } else if(newname.length < 3){
             setfirstNameError("First name must be 3 characters")
+        } else {
+            setfirstNameError("")
         }
     }   
-    const verifyLast_name = (e) => {
-        setlast_name(e.target.value);
-        if(e.target.value.length < 1){
+    const verifyLast_name = (newname) => {
+        setlast_name(newname);
+        if(newname.length < 1){
             setlastNameError("Last name is required.");
-        } else if(e.target.value.length < 3){
+        } else if(newname.length < 3){
             setlastNameError("Last name must be 3 characters")
+        }else {
+            setlastNameError("")
         }
     }   
 
-    const verifyemail = (e) => {
-        setEmail(e.target.value);
-        if(e.target.value.length < 1){
+    const verifyemail = (newemail) => {
+        setEmail(newemail);
+        if(newemail.length < 1){
             setEmailError("Email is required.");
-        } else if(e.target.value.length < 3){
+        } else if(newemail.length < 3){
             setEmailError("Email must be 3 characters")
+        }else {
+            setEmailError("")
         }
     }    
-    const verifypassword = (e) => {
-        setPassword(e.target.value);
-        if(e.target.value !== e.target.value)
-            setPasswordError("Passwords must match")
-        if(e.target.value.length < 1){
+    const verifypassword = (newpassword) => {
+        setPassword(newpassword);
+        if(newpassword.length < 1){
             setPasswordError("Password is required.");
-        } else if(e.target.value.length < 8){
+        } else if(newpassword.length < 8){
             setPasswordError("Password must be 8 characters")
+        }else {
+            setPasswordError("")
         }
+    }    
+    const verifyconfirmpassword = (confpass) => {
+        if(confpass !== password){
+            setconfirmpasswordError("Passwords must match")
+        } else {
+            setconfirmpasswordError("")
+        }
+        
     }    
 
     const createUser = (e) => {
@@ -77,43 +93,48 @@ const UserForm = (props) => {
             </div>
             <div>
                 <label>First Name: </label> 
-                <input type="text" onChange={ (e) => setfirst_name(e.target.value)} value = {first_name} />
+                <input type="text" onChange={ (e) => verifyFirst_name(e.target.value)} value = {first_name} />
                 {
                     firstNameError ?
-                    <p style>{{color: 'red'}}>{ firstNameError}</p>:
+                    <p style={{color: 'red'}}>{ firstNameError}</p>:
                     ''
                 }
             </div>
             <div>
                 <label>Last Name: </label> 
-                <input type="text" onChange={ (e) => setlast_name(e.target.value)} value = {last_name} />
+                <input type="text" onChange={ (e) => verifyLast_name(e.target.value)} value = {last_name} />
                 {
                     lastNameError ?
-                    <p style>{{color: 'red'}}>{ lastNameError}</p>:
+                    <p style={{color: 'red'}}>{ lastNameError}</p>:
                     ''
                 }
             </div>
             <div>
                 <label>Email Address: </label> 
-                <input type="text" onChange={ (e) => setEmail(e.target.value) } value = {email} />
+                <input type="text" onChange={ (e) => verifyemail(e.target.value) } value = {email} />
                 {
                     emailError ?
-                    <p style>{{color: 'red'}}>{ emailError}</p>:
+                    <p style={{color: 'red'}}>{ emailError}</p>:
                     ''
                 }
             </div>
             <div>
                 <label>Password: </label>
-                <input type="text" onChange={ (e) => setPassword(e.target.value) } value = {password} />
+                <input type="text" onChange={ (e) => verifypassword(e.target.value) } value = {password} />
                 {
                     passwordError ?
-                    <p style>{{color: 'red'}}>{ passwordError}</p>:
+                    <p style={{color: 'red'}}>{ passwordError}</p>:
                     ''
                 }
             </div>
             <div>
                 <label>Confirm Password: </label> 
-                <input type="text" onChange={ (e) => setPassword(e.target.value)} value = {password} />
+                <input type="text" onChange={ (e) => verifyconfirmpassword(e.target.value)} />
+                {
+                    confirmpasswordError ?
+                    <p style={{color: 'red'}}>{ confirmpasswordError}</p>:
+                    ''
+                }
             </div>
             <input type="submit" value="Create User" />
         </form>
