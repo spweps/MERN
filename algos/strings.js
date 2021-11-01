@@ -1,4 +1,71 @@
 
+function s2w(str){
+    let words = []
+    let punc = []
+    //push 1 word into words for each word in string
+    //identify a word
+    //a word ends with ""
+    //a word starts with the first non "" after a ""
+    //track a word until a space, push it in, then reset the word
+    let word = ''
+    for (let char of str){
+        if(char === " "){
+            if(word.length){
+                words.push(word)
+                punc.push('')
+                word = ""
+            }
+        }else if(char ===',' || char==='.' || char ==='!' || char ==='?'){
+            if(word.length)
+                words.push(word)
+                word = ""
+                punc.push('')
+        }
+        punc.push(char)
+    }
+    if(word.length)
+    words.push(word)
+    return [words, punc]
+}
+s2w("hello bob")
+
+function rwo(str){
+    let newstr = '';
+    let words = data[0]
+    let punc = data[1]
+
+    let words = s2w(str)
+    let w = words.length -1
+    let p = 0
+
+    // while(w>=0 || p < words.length){
+    //     let word = words[w]
+    //     let found = false
+    //     if(word != '.' && word != ',' && word!='?' && word!='!'){
+    //         newstr +=word
+    //         found = true
+    //     }
+    //     let punc = words[p]
+    //     if(punc == '.' || punc == ',' || punc =='?' || punc =='!'){
+    //         newstr += punc
+    //         if(p < words.length-1)
+    //         newstr += ' '
+    //         found = true
+    //     }
+    //     if(found && p < words.length-1)
+    //     newstr +=' '
+    //     w--
+    //     p++
+    // }
+    // for(let i = words.length-1; i >=0; i--){
+    //     newstr += words[i]
+    //     if(i != 0)
+    //     newstr += " "
+    // }
+
+
+    return newstr
+}
 
 //REVERSE WORD ARRAY
 // Jacob
