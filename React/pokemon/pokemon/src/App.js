@@ -17,11 +17,13 @@ function App() {
   return (
     <div className="App">
       <button onClick = {fetchapi}>Get Pokemon!</button>
-      {
-        pokemon.map((pok, i) => (
-          <p key={i}> { pok.name }</p>
-        ))
-      }
+      <ul>
+        {
+          pokemon.map((pok, i) => (
+            <li key={i}> { pok.name }</li>
+          ))
+        }
+      </ul>
     </div>
   );
 }
