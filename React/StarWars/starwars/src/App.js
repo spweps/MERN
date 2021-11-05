@@ -7,6 +7,7 @@ import Person from "./Components/Person"
 import Planet from "./Components/Planet"
 import Starship from "./Components/Starship"
 import Weapon from "./Components/Weapon"
+const arr=["Person", "Planet", "Starship", "Weapon"]
 
 function App() {
   const fetchapi = () => axios.get("https://swapi.dev/api/")
@@ -15,9 +16,22 @@ function App() {
             }).catch(err=>{
                 console.log(err);
             })
+  const starwars = (e) => {
+    e.preventDefault ()
+    console.log("it lives")
+  }
   return (
     <div className="App">
-      <h1>Welcome to React Router!</h1>
+      <div>
+        <form onSubmit={starwars}>
+          <select>{arr.map((item)=>{
+                    return (<option value={item}>{item}</option>)
+          })}</select>
+          <input type="number"/>
+          <input type="submit" value = "search"/>
+        </form>
+      </div>
+      <h1>Welcome to the Dark Side...</h1>
       <Routes>
         
         <Route path="person" element={<Person />} />
