@@ -12,6 +12,11 @@ module.exports.getSingleJoke = (req, res) => {
         .then(SingleJoke => res.json({ jokes: SingleJoke }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
+module.exports.getRandomJoke = (req, res) => {
+        Jokes.findRandom({ _id: req.params.id })
+            .then(SingleJoke => res.json({ jokes: SingleJoke }))
+            .catch(err => res.json({ message: 'Something went wrong', error: err }));
+    }
  
 module.exports.createJoke = (req, res) => {
     Jokes.create(req.body)
