@@ -2,16 +2,21 @@ const mongoose = require('mongoose');
  
 const ProgramManagerSchema = new mongoose.Schema({
     {
-    setup:{
+    title:{
     type: String,
-    required: [true, "Setup is required"],
+    required: [true, "Title is required"],
     minlength: [8, "Setup must be at least 8 characters"]
     },
-    punchline: {
+    price: {
     type: String,
-    required: [true, "Punchline is required"],
-    minlength: [12, "Punchline must be 12 characters"]
-    }},
+    required: [true, "Price is required"],
+    minlength: [1, "Price must be greater than 0"]
+    },
+    description: {
+    type: String,
+    required: [true, "Description is required"]
+    minlength: [12, "Description must be 12 characters or more"]
+    }),
     { timestamps: true }
 });
 
