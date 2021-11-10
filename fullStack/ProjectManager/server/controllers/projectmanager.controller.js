@@ -1,4 +1,4 @@
-const projectmanager = require('../models/projectmanager.model');
+const Projects = require('../models/projectmanager.model');
 
 
 module.exports.getAllProjects = (req, res) => {
@@ -9,18 +9,18 @@ module.exports.getAllProjects = (req, res) => {
  
 module.exports.getSingleProject = (req, res) => {
     Projects.findOne({ _id: req.params.id })
-        .then(SingleProject => res.json({ projects: SingleProjects }))
+        .then(SingleProject => res.json({ project: SingleProjects }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
 module.exports.getRandomProject = (req, res) => {
         Projects.findRandom({ _id: req.params.id })
-            .then(SingleProject => res.json({ projects: SingleProject }))
+            .then(SingleProject => res.json({ project: SingleProject }))
             .catch(err => res.json({ message: 'Something went wrong', error: err }));
     }
  
 module.exports.createProject = (req, res) => {
     Projects.create(req.body)
-        .then(newlyCreatedProject => res.json({ projects: newlyCreatedProject }))
+        .then(newlyCreatedProject => res.json({ project: newlyCreatedProject }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
  
