@@ -36,6 +36,6 @@ module.exports.updateExistingProject = (req, res) => {
  
 module.exports.deleteAnExistingProject = (req, res) => {
     Projects.deleteOne({ _id: req.params.id })
-        .then(result => res.json({ result: result }))
+        .then(deleteConfirmation => res.json(deleteConfirmation))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }

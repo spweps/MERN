@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react' 
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { estimatedDocumentCount } from '../../../server/models/projectmanager.model';
 
 const Detail = (props) => {
     const [project, setProject] = useState([])
@@ -18,5 +19,8 @@ const Detail = (props) => {
             <p>Description: {project.description}</p>
         </div>
     )
+    <Link to={"/project/" + project._id + "/edit"}>
+        Edit
+    </Link>
 }
 export default Detail;

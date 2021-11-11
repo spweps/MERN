@@ -15,6 +15,16 @@ const Main = (props) => {
             })
             .catch(err => console.error(err));
     })
+    const removeFromDom = projectId => {
+        setProject(project.filter(project=> project._id != personId));
+    }
+    return (
+        <div>
+            <ProjectForm/>
+            <hr/>
+            {loaded && <ProjectList project={project} removeFromDom={removeFromDom}/>}
+        </div>
+    );
 }
 export default () => {
     return (

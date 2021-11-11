@@ -1,11 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 
 const ProjectList = (props) =>{
     const [title, setTitle] = useState ("Title")
     const [price, setPrice] = useState ("Price")
     const [description, setDescription] = useState ("Description")
+    const ProjectList = (props) => {
+        const { removeFromDom } = props;
+
+        const deleteAnExistingProject = (projectId) => {
+            axios.delete('http://locolhost:8000/api/project/' + projectId)
+                .then(res => {
+                    removeFromDom(projectId)
+                })
+                .catch(err => console.error(err));
+        }
+        return (
+            <div>
+                {props.project.map((project, idx) => {
+                    return <p key={idx}>
+                        <Link to={"/" + project._id}>
+                            {project.title}, {project, price}, {project.description}
+                        </Link>
+
+                        <button onClick={(e) => {deleteAnExistingProject(project._id)}}>
+                            Delete
+                        </button>
+                    </p>
+                })}
+            </div>
+        )
+    }
     const onSubmit = (e) => {
         e.preventDefault ()
         axios.post("http://localhost:8000/api/project", {title, price, description})

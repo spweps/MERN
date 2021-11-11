@@ -18,6 +18,9 @@ function App() {
         <Route path="project/:id">
           <Detail />
         </Route>
+        <Route path="/project/:id:edit">
+          <Update />
+        </Route>
         <header className="App-header">
           <h1>Project Manager</h1>
         </header>
