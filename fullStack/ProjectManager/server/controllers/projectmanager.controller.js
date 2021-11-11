@@ -2,7 +2,7 @@ const Projects = require('../models/projectmanager.model');
 
 
 module.exports.getAllProjects = (req, res) => {
-    Projects.find()
+    Projects.find({})
         .then(allProjects => res.json({ projects: allProjects }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
