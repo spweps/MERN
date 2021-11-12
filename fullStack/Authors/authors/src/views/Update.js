@@ -8,7 +8,7 @@ const Update = (props) => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/author/' + id)
+        axios.get('http://localhost:8000/api/authors/' + id)
             .then(res => {
                 setAuthor(res.data.author);
             })
@@ -16,23 +16,20 @@ const Update = (props) => {
 
     const updateAuthor = e => {
         e.preventDefault();
-        axios.put('http://localhost:8000/api/author/' + id, {
-            name,
-            
-        })
+        axios.put('http://localhost:8000/api/authors/' + id, author)
             .then(res=> console.log(res))
             .catch(err=> console.error(err));
     }
     return (
         <div>
             <h1>Update an Author</h1>
-            <form onSubmit={updateProject}>
+            <form onSubmit={updateAuthor}>
                 <p>
                     <label>Name</label><br></br>
                     <input type="text"
                     title = "name"
-                    value = {name}
-                    onChange = {(e) => {setName(e.target.value)}} />
+                    value = {author.name}
+                    onChange = {(e) => {setAuthor({...author, name:e.target.value})}} />
                 </p>
                 <input type="submit" />
             </form>

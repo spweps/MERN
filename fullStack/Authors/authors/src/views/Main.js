@@ -1,37 +1,37 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ProjectForm from '../components/ProjectForm';
-import ProjectList from '../components/ProjectList';
+import ListAuthors from '../components/ListAuthors';
+import NewAuthor from '../components/NewAuthor';
 
 const Main = (props) => {
-    const [project, setProject] = useState([]);
+    const [author, setAuthor] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/projects')
+        axios.get('http://localhost:8000/api/authors')
             .then(res=>{
-                setProject(res.data);
+                setAuthor(res.data);
                 setLoaded(true);
             })
             .catch(err => console.error(err));
     })
-    const removeFromDom = projectId => {
-        setProject(project.filter(project=> project._id != personId));
+    const removeFromDom = authorId => {
+        setAuthor(authors.filter(author=> author._id != personId));
     }
     return (
         <div>
-            <ProjectForm/>
+            <ListAuthors/>
             <hr/>
-            {loaded && <ProjectList project={project} removeFromDom={removeFromDom}/>}
+            {loaded && <ListAuthors authors={authors} removeFromDom={removeFromDom}/>}
         </div>
     );
 }
 export default () => {
     return (
         <div>
-           <ProjectForm/>
-           <hr/>
-           {loaded && <ProjectList projects={projects}/>}
+            <ListAuthors/>
+            <hr/>
+            {loaded && <ListAuthors authors={authors}/>}
         </div>
     )
 }

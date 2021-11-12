@@ -19,12 +19,14 @@ module.exports.getRandomAuthor = (req, res) => {
     }
  
 module.exports.createAuthor = (req, res) => {
+    console.log(req.body)
     Authors.create(req.body)
         .then(newlyCreatedAuthor => res.json({ author: newlyCreatedAuthor }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
  
 module.exports.updateExistingAuthor = (req, res) => {
+    console.log(req.params, req.body)
     Authors.findOneAndUpdate(
         { _id: req.params.id },
         req.body,
