@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const Update = (props) => {
     const { id } = useParams();
     const [author, setAuthor] = useState('');
+
+    const history= useHistory();
 
 
     useEffect(() => {
@@ -17,7 +19,7 @@ const Update = (props) => {
     const updateAuthor = e => {
         e.preventDefault();
         axios.put('http://localhost:8000/api/authors/' + id, author)
-            .then(res=> console.log(res))
+            .then(res=> history.push('/authors'))
             .catch(err=> console.error(err));
     }
     return (
@@ -31,7 +33,7 @@ const Update = (props) => {
                     value = {author.name}
                     onChange = {(e) => {setAuthor({...author, name:e.target.value})}} />
                 </p>
-                <input type="submit" />
+                <input type="submit"/>
             </form>
         </div>
     )

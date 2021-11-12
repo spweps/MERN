@@ -15,7 +15,7 @@ const NewAuthor = () => {
             .then((addNew) => {
                 history.push('/authors')
             })
-            .catch()
+            .catch(err => console.log(err))
     }
     const override = (e) => {
         e.preventDefault()

@@ -9,14 +9,17 @@ const ListAuthors = (props) =>{
     let match = useRouteMatch();
     const [authors, setAuthors] = useState ([])
     
-    const deleteAnExistingAuthor = () => {
-        axios.delete('http://localhost:8000/api/authors' + authors.data.Id)
-            .then(res=>{removeFromDom(authors.data.personalId)})
+    const deleteAnExistingAuthor = (id) => {
+        axios.delete('http://localhost:8000/api/authors/' + id)
+            .then(res=>{getAllAuthors()})
             .catch(err=>console.error(err));
     }
     const getAllAuthors = () => {
         axios.get('http://localhost:8000/api/authors')
-            .then(authors=> setAuthors (authors.data.authors))
+            .then(data=> {
+                setAuthors (data.data.authors)
+                console.log(data)
+            })
             .catch()
     }
     
@@ -26,7 +29,7 @@ const ListAuthors = (props) =>{
     return(
         <div className="App">
             <h1>Favorite Authors</h1>
-            <Link to={`new`}>Add an author</Link>
+            <Link to={`authors/new`}>Add an author</Link>
             <h3>We have quotes by:</h3>
             <table>
                 <tr><th>Author</th><th>Action</th></tr>
@@ -35,7 +38,8 @@ const ListAuthors = (props) =>{
                             <td>{author.name}</td>
                             <td>
                                 <Link to={`/authors/${author._id}/edit`}>Edit</Link>
-                                <button onClick={deleteAnExistingAuthor}>Delete</button>
+                                <button onClick={()=>{
+                                    deleteAnExistingAuthor (author._id)}}>Delete</button>
                                 
                             </td>
                         </tr>

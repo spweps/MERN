@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path="/authors" component={ListAuthors} />
+          <Route exact path="/authors" component={ListAuthors} />
           <Route path="/authors/new" component={NewAuthor}/>
           <Route path="/authors/:id/edit" component={Update}/>
         </Switch>
