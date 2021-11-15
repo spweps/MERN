@@ -1,37 +1,37 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ListAuthors from '../components/ListVillains';
-import NewAuthor from '../components/NewVillain';
+import ListPirates from '../components/ListPirates';
+import NewPirate from '../components/NewPirate';
 
 const Main = (props) => {
-    const [author, setVillain] = useState([]);
+    const [pirate, setPirate] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/villains')
+        axios.get('http://localhost:8000/api/pirates')
             .then(res=>{
-                setVillain(res.data);
+                setPirate(res.data);
                 setLoaded(true);
             })
             .catch(err => console.error(err));
     })
-    const removeFromDom = villainId => {
-        setVillain(villains.filter(villain=> villain._id != villainId));
+    const removeFromDom = pirateId => {
+        setPirate(pirates.filter(pirate=> pirate._id != pirateId));
     }
     return (
         <div>
-            <ListVillains/>
+            <ListPirates/>
             <hr/>
-            {loaded && <ListVillains villains={villains} removeFromDom={removeFromDom}/>}
+            {loaded && <ListPirates pirates={pirates} removeFromDom={removeFromDom}/>}
         </div>
     );
 }
 export default () => {
     return (
         <div>
-            <ListVillains/>
+            <ListPirates/>
             <hr/>
-            {loaded && <ListVillains villains={villains}/>}
+            {loaded && <ListPirates pirates={pirates}/>}
         </div>
     )
 }

@@ -54,4 +54,4 @@ const NewVillain = () => {
     )
 }
 
-export default NewVillain
+export default NewVillain;
