@@ -12,37 +12,37 @@ const PirateSchema = new mongoose.Schema(
             {
                 type: String,
                 required: [true, "Proof is required"],
-            }
+            },
         treasures:
             {
-                type: String,
+                type: Number,
                 required: [true, "All good pirates have treasure chests"],
-                minlength: [1, "What, you don't have a chest yet? Go find one."]
-            }
+                min: [1, "What, you don't have a chest yet? Go find one."]
+            },
         catchphrase:
             {
                 type: String,
                 required: [true, "What strikes fear into the heart of sailors?"],
                 minlength: [8,"A word doesn't count as a phrase, scalleywag."]
-            }
+            },
         position:
             {
-                type: Selection,
+                type: String,
                 required: [true, "If ye ain't part of a crew, ye ain't a pirate"],
-            }
+            },
         pegleg:
             {
-                type: Selection,
+                type: Boolean,
                 required: [true]
-            }
+            },
         eyepatch:
             {
-                type: Selection,
+                type: Boolean,
                 required: [true]
-            }
+            },
         hookhand:
             {
-                type: Selection,
+                type: Boolean,
                 required: [true]
             }
     },

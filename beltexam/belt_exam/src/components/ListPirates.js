@@ -29,12 +29,14 @@ const ListPirates = (props) =>{
     return(
         <div className="App">
             <h1>Pirate Crew</h1>
-            <Link to={`pirates/new`}>Add Pirate</Link>
+            <Link to={`/pirates/new`}>Add Pirate</Link>
             <table>
                 <tr><th>Pirate</th><th>Action</th></tr>
                     {pirates.map( pirate =>
                         <tr>
-                            <td>{pirate.name}</td>
+                            <td>
+                                <Link to= {`/pirates/details/${pirate._id}`}>{pirate.name}</Link>
+                            </td>
                             <td>
                                 <Link to={`/pirates/${pirate._id}/edit`}>Get Scurvy</Link>
                                 <button onClick={()=>{

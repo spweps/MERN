@@ -19,6 +19,7 @@ module.exports.getRandomPirate = (req, res) => {
     }
  
 module.exports.createPirate = (req, res) => {
+    console.log(req.body)
     const {name, url, treasures, catchphrase, position, pegleg, eyepatch, hookhand } = req.body;
     Pirates.create({
         name,

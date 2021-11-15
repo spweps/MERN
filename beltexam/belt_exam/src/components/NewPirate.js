@@ -4,15 +4,31 @@ import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 
 const NewPirate = () => {
-    const [pirate, setPirate] = useState("")
+    const [pirates, setPirates] = useState({})
+    const [pirate, setPirate] = useState({
+        name:"", url:"", catchphrase:"", position:"Captain", treasures:0, eyepatch:true, pegleg:true, hookhand:true
+    })
+    const handleToggleEyepatch = () => {
+        const updatedPirate = {...pirate, eyepatch:!pirate.eyepatch}
+        setPirate(updatedPirate);
+    }
+    const handleToggleHookHand = () => {
+        const updatedPirate = {...pirate, hookhand:!pirate.hookhand}
+        setPirate(updatedPirate);
+    }
+    const handleTogglePegLeg = () => {
+        const updatedPirate = {...pirate, pegleg:!pirate.pegleg}
+        setPirate(updatedPirate);
+    }
     let match = useRouteMatch()
     const history= useHistory()
     const cancel = () => {
         axios.post('http://localhost:8000/api/pirates')
     }
     const submit = () => {
-        axios.post('http://localhost:8000/api/pirates', {name: pirate})
+        axios.post('http://localhost:8000/api/pirates', pirate)
             .then((addNew) => {
+                console.log(addNew)
                 history.push('/pirates')
             })
             .catch(err => console.log(err))
@@ -21,17 +37,22 @@ const NewPirate = () => {
         e.preventDefault()
     }
     const validateName = (e) => {
-        setPirate (e.target.value)
+        const updatedPirate = {...pirate, name:e.target.value}
+        setPirate(updatedPirate);
+    
     }
     const validateURL = (e) => {
-        setPirate (e.target.value)
+        const updatedPirate = {...pirate, url:e.target.value}
+        setPirate(updatedPirate);
     }
     const validateTreasures = (e) => {
-        setPirate (e.target.value)
+        const updatedPirate = {...pirate, treasures:e.target.value}
+        setPirate(updatedPirate);
     }
     const validateCatchphrase = (e) => {
-        setPirate (e.target.value)
-    }
+        const updatedPirate = {...pirate, catchphrase:e.target.value}
+        setPirate(updatedPirate);
+        }
 
     return(
         <div>
@@ -40,13 +61,13 @@ const NewPirate = () => {
             <h3>Add ye scalleywag:</h3>
             <form onSubmit={override}>
                 Pirate name:
-                <input type="text" placeholder="Name" value={pirate} onChange={validateName} />
+                <input name="name" type="text" placeholder="Name" value={pirate.name} onChange={validateName} />
                 Image url:
-                <input type="text" placeholder="URL" value ={pirate.url} onChange={validateURL}/>
+                <input name="url" type="text" placeholder="URL" value ={pirate.url} onChange={validateURL}/>
                 # of Treasures Plundered:
-                <input type="text" placeholder="Where be thy treasures?" value={pirate.treasures} onChange={validateTreasures}/>
+                <input name="treasures" type="text" placeholder="Where be thy treasures?" value={pirate.treasures} onChange={validateTreasures}/>
                 Pirate Catch Phrase:
-                <input type = "text" placeholder="Yarrrr matey just won't work" value={pirate.catchphrase} onChange={validateCatchphrase}/>
+                <input name="catchphrase" type = "text" placeholder="Yarrrr matey just won't work" value={pirate.catchphrase} onChange={validateCatchphrase}/>
                 Crew Position:
                 <select name = "position" id = "position">
                     <option value = "captain">Captain</option>
@@ -57,12 +78,15 @@ const NewPirate = () => {
                 </select>
                 <br></br>
                 <br></br>
-                <input type="checkbox" id="pegleg" name="pegleg" value="Peg Leg">
-                    <label for="pegleg">Peg Leg</label></input><br></br>
-                <input type="checkbock" id="eyepatch" name="eyepatch" value="Eye Patch">
-                    <label for="eyepatch">Eye Patch</label></input><br></br>
-                <input type = "checkbox" id="hookhand" name="hookhand" value = "Hooke Hand">
-                    <label for="hookhand">Hook Hand</label></input><br></br>
+                <input type="checkbox" id="pegleg" name="pegleg" checked={pirate.pegleg} onChange={(e) =>{
+                    handleTogglePegLeg();}}/>
+                    <label for="pegleg">Peg Leg</label><br></br>
+                <input type="checkbox" id="eyepatch" name="eyepatch" checked={pirate.eyepatch} onChange={(event) => {
+                    handleToggleEyepatch();}}/>
+                    <label for="eyepatch">Eye Patch</label><br></br>
+                <input type = "checkbox" id="hookhand" name="hookhand" checked={pirate.hookhand} onChange={(event) => {
+                    handleToggleHookHand();}}/>
+                    <label for="hookhand">Hook Hand</label><br></br>
                 
             </form>
             <button onClick={cancel}>Cancel</button>

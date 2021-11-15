@@ -4,7 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 const Update = (props) => {
     const { id } = useParams();
-    const [pirate, setPirate] = useState('');
+    const [pirate, setPirate] = useState({});
 
     const history= useHistory();
 
@@ -12,7 +12,7 @@ const Update = (props) => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/pirates/' + id)
             .then(res => {
-                setPirate(res.data.author);
+                setPirate(res.data.pirate);
             })
     }, []);
 
@@ -24,7 +24,7 @@ const Update = (props) => {
     }
     return (
         <div>
-            <h1>Update Scalleywag</h1>
+            <h1>Update {pirate.name}</h1>
             <form onSubmit={updatePirate}>
                 <p>
                     <label>Name</label><br></br>
@@ -46,6 +46,13 @@ const Update = (props) => {
                     title="catchphrase"
                     value = {pirate.catchphrase}
                     onChange = {(e) =>{setPirate({...pirate, catchphrase:e.target.value})}} />
+                </p>
+                <p>
+                    <label>URL</label><br></br>
+                    <input type="text"
+                    title="url"
+                    value = {pirate.url}
+                    onChange = {(e) =>{setPirate({...pirate, url:e.target.value})}} />
                 </p>
                 <p>
                     <label>Peg Leg</label><br></br>
