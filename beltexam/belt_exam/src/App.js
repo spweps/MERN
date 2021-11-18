@@ -2,13 +2,14 @@ import './App.css';
 import ListPirates from './components/ListPirates';
 import NewPirate from './components/NewPirate';
 import * as React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useState, Link } from "react-router-dom";
 import axios from "axios";
 import Update from "./views/Update"
 import Details from "./views/Details"
 
 
 function App() {
+  const [hasCaptain, sethasCaptain] = useState(false)
   return (
     <BrowserRouter>
       <div className="App">

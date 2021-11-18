@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useRouteMatch } from 'react-router-dom';
+import "./ListPirates.css"
 
 
 
@@ -27,9 +28,11 @@ const ListPirates = (props) =>{
         getAllPirates()
     }, [])
     return(
-        <div className="App">
+        <div className="ListPirates">
             <h1>Pirate Crew</h1>
-            <Link to={`/pirates/new`}>Add Pirate</Link>
+            <div>
+                <Link to={`/pirates/new`}>Add Pirate</Link>
+            </div>
             <table>
                 <tr><th>Pirate</th><th>Action</th></tr>
                     {pirates.map( pirate =>
